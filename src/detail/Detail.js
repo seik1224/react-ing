@@ -35,14 +35,29 @@ function Detail(props) {
   };
 
 
+  const dataId = props.database[id].id;
+  const [watch, setWatch] = useState([]);
+  
+
+
+  useEffect(() => {
+   
+    let watchedItemArray = JSON.parse(localStorage.getItem("watched") || "[]");
+    watchedItemArray = watchedItemArray.filter(item => item !== dataId);
+
+    watchedItemArray.unshift(dataId);
+
+    localStorage.setItem("watched", JSON.stringify(watchedItemArray));
+    console.log(watchedItemArray);
+    setWatch(watchedItemArray);
+  }, [dataId]);
 
   return (
     <>
-      <div className="absolute w-40 right-1 top-1 p-2 bg-white">
+      <div className="fixed w-40 right-10 top-24 p-2 bg-white z-50">
         <p className="text-center mb-4">최근 본 상품</p>
         <ul>
-            {/* localstorage를 이용하여 최근 본 상품 목록 출력하세요 */}
-          {/* <li>
+          <li>
             {watch.map((v, i) => {
               return (
                 <img
@@ -53,7 +68,7 @@ function Detail(props) {
                 />
               );
             })}
-          </li> */}
+          </li>
         </ul>
       </div>
       {alert === true ? (
