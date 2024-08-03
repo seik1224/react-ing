@@ -167,11 +167,12 @@ function App() {
 
         */}
         <Route path='/about' element={<div>소개페이지</div>} />
-        <Route path='/detail' element={
+        <Route path='/detail/:id' element={
           <>
             <Detail database={database} />
           </>
         } />
+        <Route path='*' element={<div>404 Page</div>} />
       </Routes>
     </>
   );
